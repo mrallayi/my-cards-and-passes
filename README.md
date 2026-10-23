@@ -1,6 +1,6 @@
 # My Cards & Passes
 
-Все ваши карты лояльности и билеты в одном офлайн-приложении.
+My Cards & Passes keeps loyalty cards and tickets in one offline app. Scan barcodes/QR or add details manually, view realistic card designs, customize layouts/themes, and lock sensitive passes with a PIN. Data stays on your device—no cloud.
 
 ## Возможности
 
