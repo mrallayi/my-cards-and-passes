@@ -19,16 +19,16 @@ Scan a barcode or QR code, or add the details by hand, and pick a realistic card
 ## Screenshots
 
 <p>
-  <img src="screens/1.jpg" width="180">
-  <img src="screens/2.jpg" width="180">
-  <img src="screens/3.jpg" width="180">
-  <img src="screens/4.jpg" width="180">
+  <img src="docs/docs/screens/1.jpg" width="180">
+  <img src="docs/docs/screens/2.jpg" width="180">
+  <img src="docs/docs/screens/3.jpg" width="180">
+  <img src="docs/docs/screens/4.jpg" width="180">
 </p>
 <p>
-  <img src="screens/5.jpg" width="180">
-  <img src="screens/6.jpg" width="180">
-  <img src="screens/7.jpg" width="180">
-  <img src="screens/8.jpg" width="180">
+  <img src="docs/docs/screens/5.jpg" width="180">
+  <img src="docs/docs/screens/6.jpg" width="180">
+  <img src="docs/docs/screens/7.jpg" width="180">
+  <img src="docs/docs/screens/8.jpg" width="180">
 </p>
 
 ## Installation
