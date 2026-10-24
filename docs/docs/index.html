@@ -1,69 +1,104 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My Cards & Passes</title>
+<title>My Cards &amp; Passes</title>
 <link rel="icon" href="icon.png">
 <meta name="description" content="Loyalty cards, tickets and passes in one offline app.">
 <style>
-:root{--bg:#fff;--fg:#1f1f1f;--mut:#5f6368;--line:#e3e6ea;--acc:#1a73e8;--chip:#f1f3f4}
-@media(prefers-color-scheme:dark){:root{--bg:#131314;--fg:#e8eaed;--mut:#9aa0a6;--line:#2c2e31;--acc:#8ab4f8;--chip:#202124}}
+:root{--bg:#fff;--fg:#1f1f1f;--mut:#5f6368;--line:#e3e6ea;--acc:#1a73e8;--chip:#f1f3f4;--on:#fff}
+@media(prefers-color-scheme:dark){:root{--bg:#131314;--fg:#e8eaed;--mut:#9aa0a6;--line:#2c2e31;--acc:#8ab4f8;--chip:#202124;--on:#062e6f}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Roboto,"Segoe UI",system-ui,sans-serif}
-.w{max-width:960px;margin:0 auto;padding:24px 20px 64px}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;color:var(--mut)}
-.lang button{border:1px solid var(--line);background:none;color:var(--fg);padding:6px 14px;border-radius:999px;cursor:pointer;font:inherit;font-size:14px}
-.lang button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+.w{max-width:960px;margin:0 auto;padding:20px 20px 64px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;color:var(--mut)}
+.lang{position:relative}
+.gl{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--chip);color:var(--fg);cursor:pointer;display:grid;place-items:center}
+.menu{display:none;position:absolute;inset-inline-end:0;top:52px;z-index:5;min-width:210px;max-height:60vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.18);padding:6px 0}
+.menu.open{display:block}
+.menu button{display:block;width:100%;text-align:start;padding:10px 18px;background:none;border:0;color:var(--fg);font:inherit;cursor:pointer}
+.menu button:hover{background:var(--chip)}
+.menu button[aria-current=true]{color:var(--acc);font-weight:600;background:var(--chip)}
 .hero{display:flex;gap:28px;align-items:center}
 .hero img{width:128px;height:128px;border-radius:28px;flex:none}
 h1{font-size:2.1rem;line-height:1.15;margin:0 0 4px;font-weight:500}
-.dev{color:var(--acc);font-weight:500;margin:0 0 14px}
-.stats{display:flex;gap:0;margin:28px 0;border-block:1px solid var(--line)}
+.dev{color:var(--acc);font-weight:500;margin:0 0 6px}
+.tag{color:var(--mut);margin:0 0 16px;max-width:52ch}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--acc);color:var(--on);border:1px solid var(--acc);text-decoration:none;padding:10px 32px;border-radius:999px;font:inherit;font-weight:500;cursor:pointer}
+.btn.alt{background:none;color:var(--acc);border-color:var(--line)}
+.btn:focus-visible,.gl:focus-visible,.menu button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+.note{color:var(--mut);font-size:.85rem;margin:10px 0 0}
+.stats{display:flex;margin:28px 0;border-block:1px solid var(--line)}
 .stats div{flex:1;text-align:center;padding:14px 8px;border-inline-end:1px solid var(--line)}
 .stats div:last-child{border:0}
 .stats b{display:block;font-weight:500;font-size:1.05rem}.stats span{color:var(--mut);font-size:.85rem}
-.btn{display:inline-block;background:var(--acc);color:#fff;text-decoration:none;padding:11px 36px;border-radius:999px;font-weight:500}
-@media(prefers-color-scheme:dark){.btn{color:#062e6f}}
-.btn:focus-visible,.lang button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
-.note{color:var(--mut);font-size:.85rem;margin-top:10px}
-.shots{display:flex;gap:14px;overflow-x:auto;padding:4px 0 16px;scroll-snap-type:x proximity}
-.shots img{height:440px;width:auto;border-radius:16px;border:1px solid var(--line);scroll-snap-align:start;flex:none}
-h2{font-size:1.3rem;font-weight:500;margin:36px 0 12px}
-p{max-width:70ch}
-ul{padding-left:20px;max-width:70ch}li{margin:6px 0}
-.chips{display:flex;flex-wrap:wrap;gap:8px}.chips span{background:var(--chip);padding:6px 14px;border-radius:999px;font-size:.9rem}
-.ver{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;color:var(--mut);font-size:.9rem}
-@media(max-width:560px){.hero{gap:16px}.hero img{width:88px;height:88px;border-radius:20px}h1{font-size:1.5rem}.shots img{height:360px}.btn{display:block;text-align:center}}
-[data-l]{display:none}html[lang=ru] [data-l=ru],html[lang=en] [data-l=en]{display:revert}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:4px 0 16px}
+.shots img{height:440px;width:auto;border-radius:16px;border:1px solid var(--line);flex:none}
+h2{font-size:1.3rem;font-weight:500;margin:34px 0 10px}
+p,ul,ol{max-width:70ch}li{margin:6px 0}
+.toast{position:fixed;inset-inline:0;bottom:24px;margin:auto;width:max-content;max-width:90%;background:var(--fg);color:var(--bg);padding:10px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+@media(max-width:560px){.hero{gap:16px}.hero img{width:88px;height:88px;border-radius:20px}h1{font-size:1.5rem}.shots img{height:360px}.btn{padding:10px 22px}}
 </style></head><body><div class="w">
-<div class="top"><span>GitHub</span><div class="lang"><button data-set="en" aria-pressed="true">English</button> <button data-set="ru" aria-pressed="false">Русский</button></div></div>
+<div class="top"><span>GitHub</span>
+<div class="lang"><button class="gl" id="gl" aria-label="Language" aria-haspopup="true" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg></button><div class="menu" id="menu"></div></div></div>
 <div class="hero"><img src="icon.png" alt="">
-<div><h1>My Cards &amp; Passes</h1><p class="dev">mrallayi</p>
-<a class="btn" href="https://github.com/mrallayi/my-cards-and-passes/releases/latest"><span data-l="ru">Скачать APK</span><span data-l="en">Download APK</span></a>
-<p class="note"><span data-l="ru">Для Android. Установка вне Google Play.</span><span data-l="en">For Android. Installed outside Google Play.</span></p></div></div>
-<div class="stats">
-<div><b>0 ₽ / $0</b><span data-l="ru">Бесплатно</span><span data-l="en">Free</span></div>
-<div><b data-l="ru">Офлайн</b><b data-l="en">Offline</b><span data-l="ru">Без облака</span><span data-l="en">No cloud</span></div>
-<div><b>PIN</b><span data-l="ru">Защита карт</span><span data-l="en">Card lock</span></div>
-</div>
-<div class="shots" tabindex="0" aria-label="Screenshots">
-<img src="screens/1.jpg" alt="" loading="lazy"><img src="screens/2.jpg" alt="" loading="lazy"><img src="screens/3.jpg" alt="" loading="lazy"><img src="screens/4.jpg" alt="" loading="lazy"><img src="screens/5.jpg" alt="" loading="lazy"><img src="screens/6.jpg" alt="" loading="lazy"><img src="screens/7.jpg" alt="" loading="lazy"><img src="screens/8.jpg" alt="" loading="lazy"></div>
-<h2 data-l="ru">О приложении</h2><h2 data-l="en">About this app</h2>
-<p data-l="ru">Храните карты лояльности и билеты в одном офлайн-приложении. Сканируйте штрихкоды и QR-коды или вводите данные вручную, выбирайте реалистичные дизайны карт, настраивайте макеты и темы, а конфиденциальные пропуска закрывайте PIN-кодом. Данные остаются на вашем устройстве.</p>
-<p data-l="en">Keep loyalty cards and tickets in one offline app. Scan barcodes and QR codes or add details by hand, pick realistic card designs, customize layouts and themes, and lock sensitive passes with a PIN. Your data stays on your device.</p>
-<h2 data-l="ru">Возможности</h2><h2 data-l="en">Features</h2>
-<ul data-l="ru"><li>Сканирование штрихкодов и QR-кодов</li><li>Ручное добавление карт и билетов</li><li>Готовые магазины разных стран и своя карта через «Другое»</li><li>Макеты, цвета, узоры и шрифты на выбор</li><li>Бейджи, пропуска, купоны, подарочные карты</li><li>Защита PIN-кодом, резервная копия</li></ul>
-<ul data-l="en"><li>Scan barcodes and QR codes</li><li>Add cards and tickets manually</li><li>Ready-made stores from many countries, or your own card via “Other”</li><li>Choose layouts, colors, patterns and fonts</li><li>Badges, passes, coupons, gift cards</li><li>PIN lock and backup</li></ul>
-<div class="chips"><span>Android</span><span>Offline</span><span>QR</span><span>Barcode</span></div>
-<h2 data-l="ru">Конфиденциальность</h2><h2 data-l="en">Privacy</h2>
-<p data-l="ru">Приложение не собирает и не передаёт ваши данные. Всё хранится только на вашем устройстве.</p>
-<p data-l="en">The app does not collect or share your data. Everything is stored only on your device.</p>
-<h2 data-l="ru">Как установить</h2><h2 data-l="en">How to install</h2>
-<ul data-l="ru"><li>Нажмите «Скачать APK» и скачайте файл с телефона.</li><li>Откройте файл и разрешите установку из этого источника.</li><li>Нажмите «Установить».</li></ul>
-<ul data-l="en"><li>Tap “Download APK” on your phone.</li><li>Open the file and allow installs from this source.</li><li>Tap “Install”.</li></ul>
-<div class="ver"><span data-l="ru">Версия 1.0 · </span><span data-l="en">Version 1.0 · </span><a style="color:var(--acc)" href="https://github.com/mrallayi/my-cards-and-passes">GitHub</a></div>
-</div>
+<div><h1>My Cards &amp; Passes</h1><p class="dev">mrallayi</p><p class="tag" data-k="tag"></p>
+<div class="row"><a class="btn" id="dl" href="https://github.com/mrallayi/my-cards-and-passes/releases/latest/download/my-cards-and-passes.apk" data-k="dl"></a><button class="btn alt" id="share" data-k="share"></button></div>
+<p class="note" data-k="android"></p></div></div>
+<div class="stats"><div><b data-k="price"></b><span data-k="free"></span></div><div><b>100%</b><span data-k="offline"></span></div><div><b>PIN</b><span data-k="lock"></span></div></div>
+<div class="shots" tabindex="0"><img src="screens/1.jpg" alt=""><img src="screens/2.jpg" alt=""><img src="screens/3.jpg" alt=""><img src="screens/4.jpg" alt=""><img src="screens/5.jpg" alt=""><img src="screens/6.jpg" alt=""><img src="screens/7.jpg" alt=""><img src="screens/8.jpg" alt=""></div>
+<h2 data-k="feath"></h2><ul><li data-k="f1"></li><li data-k="f2"></li><li data-k="f3"></li></ul>
+<h2 data-k="privh"></h2><p data-k="privt"></p>
+<h2 data-k="insth"></h2><ol><li data-k="i1"></li><li data-k="i2"></li></ol>
+</div><div class="toast" id="toast" data-k="copied" role="status"></div>
 <script>
-(function(){var h=document.documentElement;function s(l){h.lang=l;document.querySelectorAll('[data-set]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===l)});try{localStorage.setItem('l',l)}catch(e){}}
-document.querySelectorAll('[data-set]').forEach(function(b){b.onclick=function(){s(b.dataset.set)}});
-var l='en';try{var x=localStorage.getItem('l');if(x)l=x}catch(e){}s(l)})();
+var K=["name","dl","share","android","free","offline","lock","tag","feath","f1","f2","f3","privh","privt","insth","i1","i2","copied","price"],I={};K.forEach(function(k,i){I[k]=i});
+var L={
+en:["English","Download APK","Share","Android only","Free","Offline","PIN lock","All your loyalty cards, tickets and passes in one offline app.","Features","Scan barcodes and QR codes or add cards by hand","Realistic card designs, layouts and themes","Lock sensitive passes with a PIN","Privacy","No data is collected or shared. Everything stays on your device.","How to install","Download the APK on your phone and open it.","Allow installs from this source, then tap Install.","Link copied","$0"],
+ru:["Русский","Скачать APK","Поделиться","Только для Android","Бесплатно","Офлайн","PIN-код","Все ваши карты лояльности, билеты и пропуска в одном офлайн-приложении.","Возможности","Сканируйте штрихкоды и QR-коды или добавляйте карты вручную","Реалистичные дизайны карт, макеты и темы","Защищайте важные пропуска PIN-кодом","Конфиденциальность","Данные не собираются и не передаются. Всё хранится на вашем устройстве.","Как установить","Скачайте APK на телефон и откройте файл.","Разрешите установку из этого источника и нажмите «Установить».","Ссылка скопирована","0 ₽"],
+ar:["العربية","تنزيل APK","مشاركة","لأجهزة Android فقط","مجاني","بلا إنترنت","رمز PIN","كل بطاقات الولاء والتذاكر والتصاريح في تطبيق واحد يعمل بلا إنترنت.","المزايا","امسح الباركود ورموز QR أو أضف البطاقات يدويًا","تصاميم بطاقات واقعية وتخطيطات وسمات","احمِ التصاريح الحساسة برمز PIN","الخصوصية","لا يتم جمع أي بيانات أو مشاركتها. كل شيء يبقى على جهازك.","طريقة التثبيت","نزّل ملف APK على هاتفك وافتحه.","اسمح بالتثبيت من هذا المصدر ثم اضغط تثبيت.","تم نسخ الرابط","0 $"],
+hy:["Հայերեն","Ներբեռնել APK","Կիսվել","Միայն Android-ի համար","Անվճար","Առանց ինտերնետի","PIN կոդ","Ձեր բոլոր քարտերը, տոմսերն ու անցաթղթերը մեկ հավելվածում, առանց ինտերնետի։","Հնարավորություններ","Սկանավորեք շտրիխկոդեր և QR կոդեր կամ ավելացրեք քարտերը ձեռքով","Իրատեսական քարտերի դիզայն, դասավորություն և թեմաներ","Պաշտպանեք կարևոր անցաթղթերը PIN կոդով","Գաղտնիություն","Տվյալներ չեն հավաքվում և չեն փոխանցվում։ Ամեն ինչ մնում է ձեր սարքում։","Ինչպես տեղադրել","Ներբեռնեք APK-ը հեռախոսում և բացեք այն։","Թույլատրեք տեղադրումն այս աղբյուրից և սեղմեք «Տեղադրել»։","Հղումը պատճենվեց","0 ֏"],
+az:["Azərbaycanca","APK yüklə","Paylaş","Yalnız Android üçün","Pulsuz","Oflayn","PIN kod","Bütün kartlarınız, biletləriniz və buraxılışlarınız bir oflayn tətbiqdə.","İmkanlar","Ştrix-kod və QR kodları skan edin və ya kartları əllə əlavə edin","Real kart dizaynları, şablonlar və mövzular","Həssas buraxılışları PIN kodla qoruyun","Məxfilik","Heç bir məlumat toplanmır və ya paylaşılmır. Hər şey cihazınızda qalır.","Quraşdırma","APK faylını telefonunuza yükləyin və açın.","Bu mənbədən quraşdırmağa icazə verin və Quraşdır düyməsinə toxunun.","Link kopyalandı","0 ₼"],
+zh:["中文","下载 APK","分享","仅限 Android","免费","离线","PIN 锁","把您所有的会员卡、票券和通行证放进一个离线应用。","功能","扫描条形码和二维码，或手动添加卡片","逼真的卡片设计、布局和主题","用 PIN 码保护重要证件","隐私","不收集也不分享任何数据，所有内容都保存在您的设备上。","安装方法","在手机上下载 APK 并打开。","允许从此来源安装，然后点按“安装”。","链接已复制","¥0"],
+cs:["Čeština","Stáhnout APK","Sdílet","Pouze pro Android","Zdarma","Offline","PIN zámek","Všechny vaše věrnostní karty, vstupenky a propustky v jedné offline aplikaci.","Funkce","Skenujte čárové kódy a QR kódy nebo přidávejte karty ručně","Realistické vzhledy karet, rozvržení a motivy","Zamkněte citlivé propustky PIN kódem","Soukromí","Nesbíráme ani nesdílíme žádná data. Vše zůstává ve vašem zařízení.","Jak nainstalovat","Stáhněte si APK do telefonu a otevřete ho.","Povolte instalaci z tohoto zdroje a klepněte na Instalovat.","Odkaz zkopírován","0 Kč"],
+nl:["Nederlands","APK downloaden","Delen","Alleen voor Android","Gratis","Offline","Pincode","Al je klantenkaarten, tickets en passen in één offline app.","Functies","Scan streepjescodes en QR-codes of voeg kaarten handmatig toe","Realistische kaartontwerpen, indelingen en thema's","Beveilig gevoelige passen met een pincode","Privacy","Er worden geen gegevens verzameld of gedeeld. Alles blijft op je apparaat.","Installeren","Download de APK op je telefoon en open het bestand.","Sta installatie vanaf deze bron toe en tik op Installeren.","Link gekopieerd","€0"],
+fi:["Suomi","Lataa APK","Jaa","Vain Androidille","Ilmainen","Offline","PIN-lukitus","Kaikki kanta-asiakaskorttisi, lippusi ja passisi yhdessä offline-sovelluksessa.","Ominaisuudet","Skannaa viivakoodit ja QR-koodit tai lisää kortit käsin","Realistiset korttimallit, asettelut ja teemat","Suojaa arkaluonteiset passit PIN-koodilla","Yksityisyys","Tietoja ei kerätä eikä jaeta. Kaikki pysyy laitteellasi.","Asennus","Lataa APK puhelimeesi ja avaa se.","Salli asennus tästä lähteestä ja napauta Asenna.","Linkki kopioitu","0 €"],
+fr:["Français","Télécharger l’APK","Partager","Android uniquement","Gratuit","Hors ligne","Code PIN","Toutes vos cartes de fidélité, billets et pass dans une seule appli hors ligne.","Fonctionnalités","Scannez codes-barres et QR codes ou ajoutez vos cartes à la main","Designs de cartes réalistes, mises en page et thèmes","Verrouillez vos pass sensibles avec un code PIN","Confidentialité","Aucune donnée n’est collectée ni partagée. Tout reste sur votre appareil.","Installation","Téléchargez l’APK sur votre téléphone et ouvrez-le.","Autorisez l’installation depuis cette source, puis touchez Installer.","Lien copié","0 €"],
+ka:["ქართული","APK-ის ჩამოტვირთვა","გაზიარება","მხოლოდ Android-ისთვის","უფასო","ოფლაინ","PIN-კოდი","თქვენი ყველა ბარათი, ბილეთი და საშვი ერთ ოფლაინ აპში.","შესაძლებლობები","დაასკანირეთ შტრიხკოდები და QR კოდები ან დაამატეთ ბარათები ხელით","რეალისტური ბარათების დიზაინი, განლაგება და თემები","დაიცავით მნიშვნელოვანი საშვები PIN-კოდით","კონფიდენციალურობა","მონაცემები არ გროვდება და არ გადაიცემა. ყველაფერი რჩება თქვენს მოწყობილობაზე.","როგორ დავაყენოთ","ჩამოტვირთეთ APK ტელეფონზე და გახსენით.","დაუშვით ამ წყაროდან დაყენება და დააჭირეთ „დაყენებას“.","ბმული დაკოპირდა","0 ₾"],
+de:["Deutsch","APK herunterladen","Teilen","Nur für Android","Kostenlos","Offline","PIN-Sperre","Alle Kundenkarten, Tickets und Pässe in einer Offline-App.","Funktionen","Barcodes und QR-Codes scannen oder Karten manuell hinzufügen","Realistische Kartendesigns, Layouts und Themes","Sensible Pässe mit einer PIN sperren","Datenschutz","Es werden keine Daten erhoben oder weitergegeben. Alles bleibt auf deinem Gerät.","Installation","Lade die APK auf dein Handy und öffne sie.","Erlaube die Installation aus dieser Quelle und tippe auf Installieren.","Link kopiert","0 €"],
+hi:["हिन्दी","APK डाउनलोड करें","साझा करें","केवल Android के लिए","मुफ़्त","ऑफ़लाइन","PIN लॉक","आपके सभी लॉयल्टी कार्ड, टिकट और पास एक ऑफ़लाइन ऐप में।","विशेषताएँ","बारकोड और QR कोड स्कैन करें या कार्ड हाथ से जोड़ें","असली जैसे कार्ड डिज़ाइन, लेआउट और थीम","संवेदनशील पास को PIN से लॉक करें","गोपनीयता","कोई डेटा एकत्र या साझा नहीं किया जाता। सब कुछ आपके डिवाइस पर रहता है।","इंस्टॉल कैसे करें","अपने फ़ोन पर APK डाउनलोड करें और खोलें।","इस स्रोत से इंस्टॉल करने की अनुमति दें, फिर इंस्टॉल पर टैप करें।","लिंक कॉपी हो गया","₹0"],
+id:["Bahasa Indonesia","Unduh APK","Bagikan","Khusus Android","Gratis","Offline","Kunci PIN","Semua kartu loyalitas, tiket, dan pas Anda dalam satu aplikasi offline.","Fitur","Pindai barcode dan kode QR atau tambahkan kartu secara manual","Desain kartu realistis, tata letak, dan tema","Kunci pas sensitif dengan PIN","Privasi","Tidak ada data yang dikumpulkan atau dibagikan. Semuanya tetap di perangkat Anda.","Cara memasang","Unduh APK di ponsel Anda lalu buka.","Izinkan pemasangan dari sumber ini, lalu ketuk Pasang.","Tautan disalin","Rp0"],
+it:["Italiano","Scarica APK","Condividi","Solo per Android","Gratis","Offline","Blocco PIN","Tutte le tue carte fedeltà, biglietti e pass in un’unica app offline.","Funzionalità","Scansiona codici a barre e QR o aggiungi le carte a mano","Design delle carte realistici, layout e temi","Proteggi i pass sensibili con un PIN","Privacy","Nessun dato viene raccolto o condiviso. Tutto resta sul tuo dispositivo.","Come installare","Scarica l’APK sul telefono e aprilo.","Consenti l’installazione da questa fonte, poi tocca Installa.","Link copiato","0 €"],
+ja:["日本語","APKをダウンロード","共有","Android専用","無料","オフライン","PINロック","ポイントカード、チケット、パスをひとつのオフラインアプリに。","機能","バーコードやQRコードをスキャン、または手入力でカードを追加","リアルなカードデザイン、レイアウト、テーマ","大切なパスをPINでロック","プライバシー","データの収集や共有は一切ありません。すべて端末内に保存されます。","インストール方法","スマートフォンでAPKをダウンロードして開きます。","この提供元からのインストールを許可し、「インストール」をタップします。","リンクをコピーしました","¥0"],
+kk:["Қазақша","APK жүктеу","Бөлісу","Тек Android үшін","Тегін","Офлайн","PIN-код","Барлық бонус карталарыңыз, билеттеріңіз және рұқсаттамаларыңыз бір офлайн қосымшада.","Мүмкіндіктер","Штрихкодтар мен QR кодтарды сканерлеңіз немесе карталарды қолмен қосыңыз","Шынайы карта дизайндары, макеттер және тақырыптар","Маңызды рұқсаттамаларды PIN-кодпен қорғаңыз","Құпиялылық","Деректер жиналмайды және берілмейді. Бәрі құрылғыңызда сақталады.","Орнату жолы","APK файлын телефоныңызға жүктеп, ашыңыз.","Осы көзден орнатуға рұқсат беріп, «Орнату» түймесін басыңыз.","Сілтеме көшірілді","0 ₸"],
+ko:["한국어","APK 다운로드","공유","Android 전용","무료","오프라인","PIN 잠금","모든 멤버십 카드, 티켓, 패스를 하나의 오프라인 앱에.","기능","바코드와 QR 코드를 스캔하거나 카드를 직접 추가하세요","사실적인 카드 디자인, 레이아웃, 테마","중요한 패스를 PIN으로 잠그세요","개인정보 보호","데이터를 수집하거나 공유하지 않습니다. 모든 것이 기기에만 저장됩니다.","설치 방법","휴대폰에서 APK를 다운로드해 여세요.","이 출처의 설치를 허용한 후 설치를 누르세요.","링크가 복사되었습니다","₩0"],
+mn:["Монгол","APK татах","Хуваалцах","Зөвхөн Android-д","Үнэгүй","Офлайн","PIN код","Таны бүх урамшууллын карт, тасалбар, нэвтрэх эрх нэг офлайн аппад.","Боломжууд","Штрих код, QR кодыг скан хийх эсвэл картыг гараар нэмэх","Бодит картын загвар, байршил, сэдвүүд","Чухал нэвтрэх эрхээ PIN кодоор түгжих","Нууцлал","Мэдээлэл цуглуулахгүй, хуваалцахгүй. Бүх зүйл таны төхөөрөмж дээр үлдэнэ.","Хэрхэн суулгах","APK-г утсандаа татаж аваад нээнэ үү.","Энэ эх сурвалжаас суулгахыг зөвшөөрч, Суулгах дээр дарна уу.","Холбоос хууллаа","0 ₮"],
+pl:["Polski","Pobierz APK","Udostępnij","Tylko na Androida","Za darmo","Offline","Blokada PIN","Wszystkie karty lojalnościowe, bilety i przepustki w jednej aplikacji offline.","Funkcje","Skanuj kody kreskowe i QR lub dodawaj karty ręcznie","Realistyczne wyglądy kart, układy i motywy","Zablokuj ważne przepustki kodem PIN","Prywatność","Żadne dane nie są zbierane ani udostępniane. Wszystko zostaje na Twoim urządzeniu.","Instalacja","Pobierz plik APK na telefon i otwórz go.","Zezwól na instalację z tego źródła i dotknij Zainstaluj.","Skopiowano link","0 zł"],
+pt:["Português","Baixar APK","Partilhar","Apenas para Android","Grátis","Offline","Bloqueio por PIN","Todos os seus cartões de fidelização, bilhetes e passes numa só aplicação offline.","Funcionalidades","Leia códigos de barras e QR ou adicione cartões manualmente","Designs de cartões realistas, layouts e temas","Proteja passes sensíveis com um PIN","Privacidade","Nenhum dado é recolhido ou partilhado. Tudo fica no seu dispositivo.","Como instalar","Transfira o APK para o telemóvel e abra-o.","Permita a instalação a partir desta origem e toque em Instalar.","Ligação copiada","0 €"],
+pb:["Português (Brasil)","Baixar APK","Compartilhar","Somente para Android","Grátis","Offline","Bloqueio por PIN","Todos os seus cartões de fidelidade, ingressos e passes em um único app offline.","Recursos","Leia códigos de barras e QR ou adicione cartões manualmente","Designs de cartões realistas, layouts e temas","Proteja passes sensíveis com um PIN","Privacidade","Nenhum dado é coletado ou compartilhado. Tudo fica no seu dispositivo.","Como instalar","Baixe o APK no celular e abra o arquivo.","Permita a instalação desta fonte e toque em Instalar.","Link copiado","R$ 0"],
+sr:["Српски","Преузми APK","Подели","Само за Android","Бесплатно","Офлајн","PIN закључавање","Све ваше картице лојалности, карте и пропуснице у једној офлајн апликацији.","Могућности","Скенирајте бар-кодове и QR кодове или додајте картице ручно","Реалистичан изглед картица, распореди и теме","Закључајте осетљиве пропуснице PIN-ом","Приватност","Подаци се не прикупљају нити деле. Све остаје на вашем уређају.","Како да инсталирате","Преузмите APK на телефон и отворите га.","Дозволите инсталацију из овог извора, па додирните Инсталирај.","Линк је копиран","0 RSD"],
+es:["Español","Descargar APK","Compartir","Solo para Android","Gratis","Sin conexión","Bloqueo con PIN","Todas tus tarjetas de fidelidad, entradas y pases en una sola app sin conexión.","Funciones","Escanea códigos de barras y QR o añade tarjetas a mano","Diseños de tarjetas realistas, formatos y temas","Bloquea los pases sensibles con un PIN","Privacidad","No se recopilan ni comparten datos. Todo se queda en tu dispositivo.","Cómo instalar","Descarga el APK en tu teléfono y ábrelo.","Permite instalar desde esta fuente y toca Instalar.","Enlace copiado","0 €"],
+em:["Español (México)","Descargar APK","Compartir","Solo para Android","Gratis","Sin conexión","Bloqueo con PIN","Todas tus tarjetas de lealtad, boletos y pases en una sola app sin conexión.","Funciones","Escanea códigos de barras y QR o agrega tarjetas manualmente","Diseños de tarjetas realistas, formatos y temas","Bloquea los pases sensibles con un PIN","Privacidad","No se recopilan ni comparten datos. Todo se queda en tu dispositivo.","Cómo instalar","Descarga el APK en tu celular y ábrelo.","Permite la instalación desde esta fuente y toca Instalar.","Enlace copiado","$0 MXN"],
+sv:["Svenska","Ladda ner APK","Dela","Endast för Android","Gratis","Offline","PIN-lås","Alla dina kundkort, biljetter och pass i en offlineapp.","Funktioner","Skanna streckkoder och QR-koder eller lägg till kort manuellt","Realistiska kortdesigner, layouter och teman","Lås känsliga pass med en PIN-kod","Integritet","Ingen data samlas in eller delas. Allt stannar på din enhet.","Så installerar du","Ladda ner APK-filen till telefonen och öppna den.","Tillåt installation från den här källan och tryck på Installera.","Länk kopierad","0 kr"],
+tg:["Тоҷикӣ","Боргирии APK","Мубодила","Танҳо барои Android","Ройгон","Офлайн","Рамзи PIN","Ҳамаи кортҳо, чипта ва иҷозатномаҳои шумо дар як барномаи офлайн.","Имкониятҳо","Штрихкод ва QR-кодро скан кунед ё кортҳоро дастӣ илова намоед","Тарҳҳои воқеии корт, ҷойгиркунӣ ва мавзӯъҳо","Иҷозатномаҳои муҳимро бо рамзи PIN қулф кунед","Махфият","Маълумот ҷамъ карда ва дода намешавад. Ҳама чиз дар дастгоҳи шумо мемонад.","Тарзи насб","APK-ро ба телефон боргирӣ карда, кушоед.","Насби аз ин манбаъро иҷозат диҳед ва «Насб»-ро пахш кунед.","Истинод нусха шуд","0 сом."],
+tr:["Türkçe","APK’yı indir","Paylaş","Yalnızca Android","Ücretsiz","Çevrimdışı","PIN kilidi","Tüm sadakat kartlarınız, biletleriniz ve geçişleriniz tek bir çevrimdışı uygulamada.","Özellikler","Barkod ve QR kodlarını tarayın veya kartları elle ekleyin","Gerçekçi kart tasarımları, düzenler ve temalar","Hassas geçişleri PIN ile kilitleyin","Gizlilik","Hiçbir veri toplanmaz veya paylaşılmaz. Her şey cihazınızda kalır.","Nasıl kurulur","APK’yı telefonunuza indirip açın.","Bu kaynaktan kuruluma izin verin ve Yükle’ye dokunun.","Bağlantı kopyalandı","0 ₺"],
+uk:["Українська","Завантажити APK","Поділитися","Лише для Android","Безкоштовно","Офлайн","PIN-код","Усі ваші карти лояльності, квитки та перепустки в одному офлайн-застосунку.","Можливості","Скануйте штрихкоди та QR-коди або додавайте картки вручну","Реалістичні дизайни карток, макети та теми","Захищайте важливі перепустки PIN-кодом","Конфіденційність","Дані не збираються і не передаються. Усе зберігається на вашому пристрої.","Як встановити","Завантажте APK на телефон і відкрийте його.","Дозвольте встановлення з цього джерела й натисніть «Установити».","Посилання скопійовано","0 ₴"],
+uz:["Oʻzbekcha","APK yuklab olish","Ulashish","Faqat Android uchun","Bepul","Oflayn","PIN-kod","Barcha sodiqlik kartalari, chiptalar va ruxsatnomalaringiz bitta oflayn ilovada.","Imkoniyatlar","Shtrix-kod va QR kodlarni skanerlang yoki kartalarni qoʻlda qoʻshing","Real kartalar dizayni, maketlar va mavzular","Muhim ruxsatnomalarni PIN-kod bilan himoyalang","Maxfiylik","Hech qanday maʼlumot yigʻilmaydi yoki ulashilmaydi. Hammasi qurilmangizda qoladi.","Oʻrnatish","APK faylini telefoningizga yuklab oching.","Ushbu manbadan oʻrnatishga ruxsat bering va “Oʻrnatish” tugmasini bosing.","Havola nusxalandi","0 soʻm"],
+vi:["Tiếng Việt","Tải APK","Chia sẻ","Chỉ dành cho Android","Miễn phí","Ngoại tuyến","Khóa PIN","Mọi thẻ khách hàng thân thiết, vé và thẻ ra vào của bạn trong một ứng dụng ngoại tuyến.","Tính năng","Quét mã vạch và mã QR hoặc thêm thẻ thủ công","Thiết kế thẻ chân thực, bố cục và giao diện","Khóa các thẻ nhạy cảm bằng mã PIN","Quyền riêng tư","Không thu thập hay chia sẻ dữ liệu. Mọi thứ nằm trên thiết bị của bạn.","Cách cài đặt","Tải APK về điện thoại và mở tệp.","Cho phép cài đặt từ nguồn này rồi nhấn Cài đặt.","Đã sao chép liên kết","0 ₫"]};
+var H={pb:"pt-BR",em:"es-MX"},cur="en",menu=document.getElementById("menu"),gl=document.getElementById("gl");
+function set(c){if(!L[c])c="en";cur=c;var a=L[c],h=document.documentElement;
+document.querySelectorAll("[data-k]").forEach(function(e){e.textContent=a[I[e.dataset.k]]});
+h.lang=H[c]||c;h.dir=c==="ar"?"rtl":"ltr";
+menu.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-current",b.dataset.c===c)});
+try{localStorage.setItem("l",c)}catch(e){}}
+Object.keys(L).forEach(function(c){var b=document.createElement("button");b.dataset.c=c;b.textContent=L[c][0];b.onclick=function(){set(c);close()};menu.appendChild(b)});
+function close(){menu.classList.remove("open");gl.setAttribute("aria-expanded","false")}
+gl.onclick=function(e){e.stopPropagation();var o=menu.classList.toggle("open");gl.setAttribute("aria-expanded",o)};
+document.addEventListener("click",close);document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
+var t=document.getElementById("toast");
+document.getElementById("share").onclick=function(){var u=location.href.split("#")[0];
+if(navigator.share){navigator.share({title:"My Cards & Passes",url:u}).catch(function(){})}
+else if(navigator.clipboard){navigator.clipboard.writeText(u).then(function(){t.classList.add("on");setTimeout(function(){t.classList.remove("on")},2000)})}};
+var s="en";try{s=localStorage.getItem("l")||"en"}catch(e){}set(s);
 </script></body></html>
