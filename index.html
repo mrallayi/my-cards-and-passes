@@ -18,7 +18,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Roboto,"Segoe 
 .menu button{display:block;width:100%;text-align:start;padding:10px 18px;background:none;border:0;color:var(--fg);font:inherit;cursor:pointer}
 .menu button:hover{background:var(--chip)}
 .menu button[aria-current=true]{color:var(--acc);font-weight:600;background:var(--chip)}
-.hero{display:flex;gap:28px;align-items:center}
+.hero{display:flex;gap:28px;align-items:flex-start}
 .hero img{width:128px;height:128px;border-radius:28px;flex:none}
 h1{font-size:2.1rem;line-height:1.15;margin:0 0 4px;font-weight:500}
 .dev{color:var(--acc);font-weight:500;margin:0 0 6px}
@@ -36,6 +36,12 @@ h1{font-size:2.1rem;line-height:1.15;margin:0 0 4px;font-weight:500}
 .shots img{height:440px;width:auto;border-radius:16px;border:1px solid var(--line);flex:none}
 h2{font-size:1.3rem;font-weight:500;margin:34px 0 10px}
 p,ul,ol{max-width:70ch}li{margin:6px 0}
+.shots img{cursor:zoom-in}.links{margin-top:22px}
+.lb{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center}.lb[hidden]{display:none}
+.lb img{max-width:calc(100% - 120px);max-height:94vh;border-radius:12px;height:auto}
+.lb button{position:absolute;border:0;border-radius:50%;width:48px;height:48px;background:rgba(255,255,255,.16);color:#fff;font-size:26px;cursor:pointer}
+.lb button:focus-visible{outline:3px solid #fff}.lbx{top:16px;inset-inline-end:16px}.lbp{inset-inline-start:12px}.lbn{inset-inline-end:12px}
+@media(max-width:560px){.lb img{max-width:100%;max-height:88vh}.lbp,.lbn{top:auto;bottom:16px}.lbp{inset-inline-start:calc(50% - 60px)}.lbn{inset-inline-end:calc(50% - 60px)}}
 .toast{position:fixed;inset-inline:0;bottom:24px;margin:auto;width:max-content;max-width:90%;background:var(--fg);color:var(--bg);padding:10px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.on{opacity:1}
 @media(max-width:560px){.hero{gap:16px}.hero img{width:88px;height:88px;border-radius:20px}h1{font-size:1.5rem}.shots img{height:360px}.btn{padding:10px 22px}}
@@ -44,16 +50,17 @@ p,ul,ol{max-width:70ch}li{margin:6px 0}
 <div class="lang"><button class="gl" id="gl" aria-label="Language" aria-haspopup="true" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg></button><div class="menu" id="menu"></div></div></div>
 <div class="hero"><img src="docs/docs/icon.png" alt="">
 <div><h1>My Cards &amp; Passes</h1><p class="dev">mrallayi</p><p class="tag" data-k="tag"></p>
-<div class="row"><a class="btn" id="dl" href="https://github.com/mrallayi/my-cards-and-passes/releases/latest/download/My.Cards.Passes.apk" data-k="dl"></a><button class="btn alt" id="share" data-k="share"></button></div>
+<div class="row"><a class="btn" id="dl" href="https://github.com/mrallayi/my-cards-and-passes/releases/latest/download/My.Cards.and.Passes.apk" data-k="dl"></a><button class="btn alt" id="share" data-k="share"></button></div>
 <p class="note" data-k="android"></p></div></div>
 <div class="stats"><div><b data-k="price"></b><span data-k="free"></span></div><div><b>100%</b><span data-k="offline"></span></div><div><b>PIN</b><span data-k="lock"></span></div></div>
 <div class="shots" tabindex="0"><img src="docs/docs/screens/1.jpg" alt=""><img src="docs/docs/screens/2.jpg" alt=""><img src="docs/docs/screens/3.jpg" alt=""><img src="docs/docs/screens/4.jpg" alt=""><img src="docs/docs/screens/5.jpg" alt=""><img src="docs/docs/screens/6.jpg" alt=""><img src="docs/docs/screens/7.jpg" alt=""><img src="docs/docs/screens/8.jpg" alt=""></div>
 <h2 data-k="feath"></h2><ul><li data-k="f1"></li><li data-k="f2"></li><li data-k="f3"></li></ul>
 <h2 data-k="privh"></h2><p data-k="privt"></p>
 <h2 data-k="insth"></h2><ol><li data-k="i1"></li><li data-k="i2"></li></ol>
-</div><div class="toast" id="toast" data-k="copied" role="status"></div>
+<div class="row links"><a class="btn alt" href="https://github.com/MrAllayi" target="_blank" rel="noopener"><span data-k="auth"></span>: mrallayi</a><a class="btn alt" href="https://github.com/mrallayi/my-cards-and-passes" target="_blank" rel="noopener"><span data-k="repo"></span>: my-cards-and-passes</a></div>
+</div><div class="lb" id="lb" hidden><button class="lbx" id="lbc" aria-label="Close">✕</button><button class="lbp" id="lbp" aria-label="Previous">‹</button><img id="lbi" alt=""><button class="lbn" id="lbn" aria-label="Next">›</button></div><div class="toast" id="toast" data-k="copied" role="status"></div>
 <script>
-var K=["name","dl","share","android","free","offline","lock","tag","feath","f1","f2","f3","privh","privt","insth","i1","i2","copied","price"],I={};K.forEach(function(k,i){I[k]=i});
+var K=["name","dl","share","android","free","offline","lock","tag","feath","f1","f2","f3","privh","privt","insth","i1","i2","copied","price","auth","repo"],I={};K.forEach(function(k,i){I[k]=i});
 var L={
 en:["English","Download APK","Share","Android only","Free","Offline","PIN lock","All your loyalty cards, tickets and passes in one offline app.","Features","Scan barcodes and QR codes or add cards by hand","Realistic card designs, layouts and themes","Lock sensitive passes with a PIN","Privacy","No data is collected or shared. Everything stays on your device.","How to install","Download the APK on your phone and open it.","Allow installs from this source, then tap Install.","Link copied","$0"],
 ru:["Русский","Скачать APK","Поделиться","Только для Android","Бесплатно","Офлайн","PIN-код","Все ваши карты лояльности, билеты и пропуска в одном офлайн-приложении.","Возможности","Сканируйте штрихкоды и QR-коды или добавляйте карты вручную","Реалистичные дизайны карт, макеты и темы","Защищайте важные пропуска PIN-кодом","Конфиденциальность","Данные не собираются и не передаются. Всё хранится на вашем устройстве.","Как установить","Скачайте APK на телефон и откройте файл.","Разрешите установку из этого источника и нажмите «Установить».","Ссылка скопирована","0 ₽"],
@@ -86,6 +93,8 @@ tr:["Türkçe","APK’yı indir","Paylaş","Yalnızca Android","Ücretsiz","Çev
 uk:["Українська","Завантажити APK","Поділитися","Лише для Android","Безкоштовно","Офлайн","PIN-код","Усі ваші карти лояльності, квитки та перепустки в одному офлайн-застосунку.","Можливості","Скануйте штрихкоди та QR-коди або додавайте картки вручну","Реалістичні дизайни карток, макети та теми","Захищайте важливі перепустки PIN-кодом","Конфіденційність","Дані не збираються і не передаються. Усе зберігається на вашому пристрої.","Як встановити","Завантажте APK на телефон і відкрийте його.","Дозвольте встановлення з цього джерела й натисніть «Установити».","Посилання скопійовано","0 ₴"],
 uz:["Oʻzbekcha","APK yuklab olish","Ulashish","Faqat Android uchun","Bepul","Oflayn","PIN-kod","Barcha sodiqlik kartalari, chiptalar va ruxsatnomalaringiz bitta oflayn ilovada.","Imkoniyatlar","Shtrix-kod va QR kodlarni skanerlang yoki kartalarni qoʻlda qoʻshing","Real kartalar dizayni, maketlar va mavzular","Muhim ruxsatnomalarni PIN-kod bilan himoyalang","Maxfiylik","Hech qanday maʼlumot yigʻilmaydi yoki ulashilmaydi. Hammasi qurilmangizda qoladi.","Oʻrnatish","APK faylini telefoningizga yuklab oching.","Ushbu manbadan oʻrnatishga ruxsat bering va “Oʻrnatish” tugmasini bosing.","Havola nusxalandi","0 soʻm"],
 vi:["Tiếng Việt","Tải APK","Chia sẻ","Chỉ dành cho Android","Miễn phí","Ngoại tuyến","Khóa PIN","Mọi thẻ khách hàng thân thiết, vé và thẻ ra vào của bạn trong một ứng dụng ngoại tuyến.","Tính năng","Quét mã vạch và mã QR hoặc thêm thẻ thủ công","Thiết kế thẻ chân thực, bố cục và giao diện","Khóa các thẻ nhạy cảm bằng mã PIN","Quyền riêng tư","Không thu thập hay chia sẻ dữ liệu. Mọi thứ nằm trên thiết bị của bạn.","Cách cài đặt","Tải APK về điện thoại và mở tệp.","Cho phép cài đặt từ nguồn này rồi nhấn Cài đặt.","Đã sao chép liên kết","0 ₫"]};
+var A={en:["Author","Repository"],ru:["Автор","Репозиторий"],ar:["المطوّر","المستودع"],hy:["Հեղինակ","Շտեմարան"],az:["Müəllif","Repozitoriya"],zh:["作者","代码仓库"],cs:["Autor","Repozitář"],nl:["Auteur","Repository"],fi:["Tekijä","Repositorio"],fr:["Auteur","Dépôt"],ka:["ავტორი","რეპოზიტორია"],de:["Autor","Repository"],hi:["लेखक","रिपॉजिटरी"],id:["Pembuat","Repositori"],it:["Autore","Repository"],ja:["作者","リポジトリ"],kk:["Автор","Репозиторий"],ko:["제작자","저장소"],mn:["Зохиогч","Репозитори"],pl:["Autor","Repozytorium"],pt:["Autor","Repositório"],pb:["Autor","Repositório"],sr:["Аутор","Репозиторијум"],es:["Autor","Repositorio"],em:["Autor","Repositorio"],sv:["Upphovsman","Repository"],tg:["Муаллиф","Репозиторий"],tr:["Yazar","Depo"],uk:["Автор","Репозиторій"],uz:["Muallif","Repozitoriy"],vi:["Tác giả","Kho mã nguồn"]};
+Object.keys(A).forEach(function(c){L[c].push(A[c][0],A[c][1])});
 var H={pb:"pt-BR",em:"es-MX"},cur="en",menu=document.getElementById("menu"),gl=document.getElementById("gl");
 function set(c){if(!L[c])c="en";cur=c;var a=L[c],h=document.documentElement;
 document.querySelectorAll("[data-k]").forEach(function(e){e.textContent=a[I[e.dataset.k]]});
@@ -96,6 +105,15 @@ Object.keys(L).forEach(function(c){var b=document.createElement("button");b.data
 function close(){menu.classList.remove("open");gl.setAttribute("aria-expanded","false")}
 gl.onclick=function(e){e.stopPropagation();var o=menu.classList.toggle("open");gl.setAttribute("aria-expanded",o)};
 document.addEventListener("click",close);document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
+var imgs=[].slice.call(document.querySelectorAll(".shots img")),ci=0,lb=document.getElementById("lb"),lbi=document.getElementById("lbi"),sx=0;
+function show(i){ci=(i+imgs.length)%imgs.length;lbi.src=imgs[ci].src;lb.hidden=false;document.body.style.overflow="hidden";document.getElementById("lbc").focus()}
+function hide(){lb.hidden=true;document.body.style.overflow=""}
+imgs.forEach(function(m,i){m.tabIndex=0;m.onclick=function(){show(i)};m.onkeydown=function(e){if(e.key==="Enter")show(i)}});
+document.getElementById("lbc").onclick=hide;document.getElementById("lbp").onclick=function(){show(ci-1)};document.getElementById("lbn").onclick=function(){show(ci+1)};
+lb.onclick=function(e){if(e.target===lb)hide()};
+lb.addEventListener("touchstart",function(e){sx=e.touches[0].clientX});
+lb.addEventListener("touchend",function(e){var d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(ci+(d<0?1:-1))});
+document.addEventListener("keydown",function(e){if(lb.hidden)return;if(e.key==="Escape")hide();if(e.key==="ArrowRight")show(ci+1);if(e.key==="ArrowLeft")show(ci-1)});
 var t=document.getElementById("toast");
 document.getElementById("share").onclick=function(){var u=location.href.split("#")[0];
 if(navigator.share){navigator.share({title:"My Cards & Passes",url:u}).catch(function(){})}
