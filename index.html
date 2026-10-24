@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Cards & Passes</title>
+<link rel="icon" href="icon.svg">
+<meta name="description" content="Loyalty cards, tickets and passes in one offline app.">
+<style>
+:root{--bg:#fff;--fg:#1f1f1f;--mut:#5f6368;--line:#e3e6ea;--acc:#1a73e8;--chip:#f1f3f4}
+@media(prefers-color-scheme:dark){:root{--bg:#131314;--fg:#e8eaed;--mut:#9aa0a6;--line:#2c2e31;--acc:#8ab4f8;--chip:#202124}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Roboto,"Segoe UI",system-ui,sans-serif}
+.w{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;color:var(--mut)}
+.lang button{border:1px solid var(--line);background:none;color:var(--fg);padding:6px 14px;border-radius:999px;cursor:pointer;font:inherit;font-size:14px}
+.lang button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+.hero{display:flex;gap:28px;align-items:center}
+.hero img{width:128px;height:128px;border-radius:28px;flex:none}
+h1{font-size:2.1rem;line-height:1.15;margin:0 0 4px;font-weight:500}
+.dev{color:var(--acc);font-weight:500;margin:0 0 14px}
+.stats{display:flex;gap:0;margin:28px 0;border-block:1px solid var(--line)}
+.stats div{flex:1;text-align:center;padding:14px 8px;border-inline-end:1px solid var(--line)}
+.stats div:last-child{border:0}
+.stats b{display:block;font-weight:500;font-size:1.05rem}.stats span{color:var(--mut);font-size:.85rem}
+.btn{display:inline-block;background:var(--acc);color:#fff;text-decoration:none;padding:11px 36px;border-radius:999px;font-weight:500}
+@media(prefers-color-scheme:dark){.btn{color:#062e6f}}
+.btn:focus-visible,.lang button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+.note{color:var(--mut);font-size:.85rem;margin-top:10px}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:4px 0 16px;scroll-snap-type:x proximity}
+.shots img{height:440px;width:auto;border-radius:16px;border:1px solid var(--line);scroll-snap-align:start;flex:none}
+h2{font-size:1.3rem;font-weight:500;margin:36px 0 12px}
+p{max-width:70ch}
+ul{padding-left:20px;max-width:70ch}li{margin:6px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips span{background:var(--chip);padding:6px 14px;border-radius:999px;font-size:.9rem}
+.ver{border-top:1px solid var(--line);margin-top:40px;padding-top:12px;color:var(--mut);font-size:.9rem}
+@media(max-width:560px){.hero{gap:16px}.hero img{width:88px;height:88px;border-radius:20px}h1{font-size:1.5rem}.shots img{height:360px}.btn{display:block;text-align:center}}
+[data-l]{display:none}html[lang=ru] [data-l=ru],html[lang=en] [data-l=en]{display:revert}
+</style></head><body><div class="w">
+<div class="top"><span>GitHub</span><div class="lang"><button data-set="en" aria-pressed="true">English</button> <button data-set="ru" aria-pressed="false">Русский</button></div></div>
+<div class="hero"><img src="icon.svg" alt="">
+<div><h1>My Cards &amp; Passes</h1><p class="dev">mrallayi</p>
+<a class="btn" href="https://github.com/mrallayi/my-cards-and-passes/releases/latest"><span data-l="ru">Скачать APK</span><span data-l="en">Download APK</span></a>
+<p class="note"><span data-l="ru">Для Android. Установка вне Google Play.</span><span data-l="en">For Android. Installed outside Google Play.</span></p></div></div>
+<div class="stats">
+<div><b>0 ₽ / $0</b><span data-l="ru">Бесплатно</span><span data-l="en">Free</span></div>
+<div><b data-l="ru">Офлайн</b><b data-l="en">Offline</b><span data-l="ru">Без облака</span><span data-l="en">No cloud</span></div>
+<div><b>PIN</b><span data-l="ru">Защита карт</span><span data-l="en">Card lock</span></div>
+</div>
+<div class="shots" tabindex="0" aria-label="Screenshots">
+<img src="screens/1.jpg" alt="" loading="lazy"><img src="screens/2.jpg" alt="" loading="lazy"><img src="screens/3.jpg" alt="" loading="lazy"><img src="screens/4.jpg" alt="" loading="lazy"><img src="screens/5.jpg" alt="" loading="lazy"><img src="screens/6.jpg" alt="" loading="lazy"><img src="screens/7.jpg" alt="" loading="lazy"><img src="screens/8.jpg" alt="" loading="lazy"></div>
+<h2 data-l="ru">О приложении</h2><h2 data-l="en">About this app</h2>
+<p data-l="ru">Храните карты лояльности и билеты в одном офлайн-приложении. Сканируйте штрихкоды и QR-коды или вводите данные вручную, выбирайте реалистичные дизайны карт, настраивайте макеты и темы, а конфиденциальные пропуска закрывайте PIN-кодом. Данные остаются на вашем устройстве.</p>
+<p data-l="en">Keep loyalty cards and tickets in one offline app. Scan barcodes and QR codes or add details by hand, pick realistic card designs, customize layouts and themes, and lock sensitive passes with a PIN. Your data stays on your device.</p>
+<h2 data-l="ru">Возможности</h2><h2 data-l="en">Features</h2>
+<ul data-l="ru"><li>Сканирование штрихкодов и QR-кодов</li><li>Ручное добавление карт и билетов</li><li>Готовые магазины разных стран и своя карта через «Другое»</li><li>Макеты, цвета, узоры и шрифты на выбор</li><li>Бейджи, пропуска, купоны, подарочные карты</li><li>Защита PIN-кодом, резервная копия</li></ul>
+<ul data-l="en"><li>Scan barcodes and QR codes</li><li>Add cards and tickets manually</li><li>Ready-made stores from many countries, or your own card via “Other”</li><li>Choose layouts, colors, patterns and fonts</li><li>Badges, passes, coupons, gift cards</li><li>PIN lock and backup</li></ul>
+<div class="chips"><span>Android</span><span>Offline</span><span>QR</span><span>Barcode</span></div>
+<h2 data-l="ru">Конфиденциальность</h2><h2 data-l="en">Privacy</h2>
+<p data-l="ru">Приложение не собирает и не передаёт ваши данные. Всё хранится только на вашем устройстве.</p>
+<p data-l="en">The app does not collect or share your data. Everything is stored only on your device.</p>
+<h2 data-l="ru">Как установить</h2><h2 data-l="en">How to install</h2>
+<ul data-l="ru"><li>Нажмите «Скачать APK» и скачайте файл с телефона.</li><li>Откройте файл и разрешите установку из этого источника.</li><li>Нажмите «Установить».</li></ul>
+<ul data-l="en"><li>Tap “Download APK” on your phone.</li><li>Open the file and allow installs from this source.</li><li>Tap “Install”.</li></ul>
+<div class="ver"><span data-l="ru">Версия 1.0 · </span><span data-l="en">Version 1.0 · </span><a style="color:var(--acc)" href="https://github.com/mrallayi/my-cards-and-passes">GitHub</a></div>
+</div>
+<script>
+(function(){var h=document.documentElement;function s(l){h.lang=l;document.querySelectorAll('[data-set]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===l)});try{localStorage.setItem('l',l)}catch(e){}}
+document.querySelectorAll('[data-set]').forEach(function(b){b.onclick=function(){s(b.dataset.set)}});
+var l='en';try{var x=localStorage.getItem('l');if(x)l=x}catch(e){}s(l)})();
+</script></body></html>
