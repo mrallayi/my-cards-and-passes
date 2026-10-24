@@ -4,7 +4,7 @@
 
 Scan a barcode or QR code, or add the details by hand, and pick a realistic card design. Your cards stay on your device. There is no account and no cloud.
 
-[⬇️ Download the latest version](https://github.com/mrallayi/my-cards-and-passes/releases/latest) · [🌐 App page](https://mrallayi.github.io/my-cards-and-passes/)
+[⬇️ Download the latest version](https://github.com/mrallayi/my-cards-and-passes/releases/latest) · [🌐 App page](https://mrallayi.github.io/my-cards-and-passes/docs/)
 
 ## Features
 
@@ -19,16 +19,16 @@ Scan a barcode or QR code, or add the details by hand, and pick a realistic card
 ## Screenshots
 
 <p>
-  <img src="1.jpg" width="180">
-  <img src="2.jpg" width="180">
-  <img src="3.jpg" width="180">
-  <img src="4.jpg" width="180">
+  <img src="docs/docs/screens/1.jpg" width="180">
+  <img src="docs/docs/screens/2.jpg" width="180">
+  <img src="docs/docs/screens/3.jpg" width="180">
+  <img src="docs/docs/screens/4.jpg" width="180">
 </p>
 <p>
-  <img src="5.jpg" width="180">
-  <img src="6.jpg" width="180">
-  <img src="7.jpg" width="180">
-  <img src="8.jpg" width="180">
+  <img src="docs/docs/screens/5.jpg" width="180">
+  <img src="docs/docs/screens/6.jpg" width="180">
+  <img src="docs/docs/screens/7.jpg" width="180">
+  <img src="docs/docs/screens/8.jpg" width="180">
 </p>
 
 ## Installation
@@ -36,4 +36,9 @@ Scan a barcode or QR code, or add the details by hand, and pick a realistic card
 The app is for Android and is not published on Google Play.
 
 1. Open the [latest release](https://github.com/mrallayi/my-cards-and-passes/releases/latest) on your phone and download the `.apk` file.
-2. Open
+2. Open the downloaded file. If Android asks, allow installing apps from this source.
+3. Tap **Install**.
+
+## Privacy
+
+My Cards & Passes does not collect, store or share your personal data on any server. All your cards stay on your device.
