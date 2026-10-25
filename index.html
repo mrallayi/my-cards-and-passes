@@ -12,14 +12,13 @@ body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Roboto,"Segoe 
 .w{max-width:960px;margin:0 auto;padding:20px 20px 64px}
 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;color:var(--mut)}
 .lang{position:relative}
-.gl{display:flex;align-items:center;gap:8px;height:46px;padding:0 16px;border-radius:999px;border:0;background:var(--acc);color:var(--on);font:inherit;font-weight:500;cursor:pointer;box-shadow:0 2px 8px rgba(26,115,232,.35);animation:pulse 1.6s 1s 3}
+.gl{display:flex;align-items:center;gap:8px;height:46px;padding:0 16px;border-radius:999px;border:0;background:var(--acc);color:var(--on);font:inherit;font-weight:500;cursor:pointer;box-shadow:0 2px 8px rgba(26,115,232,.35)}
 .gl svg{flex:none}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(26,115,232,.55)}100%{box-shadow:0 0 0 14px rgba(26,115,232,0)}}
-@media(prefers-reduced-motion:reduce){.gl{animation:none}}
+.fl{width:22px;height:16px;object-fit:cover;border-radius:3px;box-shadow:0 0 0 1px rgba(128,128,128,.35);flex:none}.fe{width:22px;text-align:center;line-height:1;flex:none}
 .stat{font-weight:500;margin:14px 0 4px}.avail{color:var(--acc);margin:0}
 .menu{display:none;position:absolute;inset-inline-end:0;top:56px;z-index:5;min-width:230px;max-height:60vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.18);padding:6px 0}
 .menu.open{display:block}
-.menu button{display:block;width:100%;text-align:start;padding:10px 18px;background:none;border:0;color:var(--fg);font:inherit;cursor:pointer}
+.menu button{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:10px 18px;background:none;border:0;color:var(--fg);font:inherit;cursor:pointer}
 .menu button:hover{background:var(--chip)}
 .menu button[aria-current=true]{color:var(--acc);font-weight:600;background:var(--chip)}
 .hero{display:flex;gap:28px;align-items:flex-start}
@@ -104,13 +103,15 @@ var A={en:["Author","Repository"],ru:["Автор","Репозиторий"],ar:
 Object.keys(A).forEach(function(c){L[c].push(A[c][0],A[c][1])});
 var B={"en":["Languages: 32 · Regions: 59 · Stores: 3187","English is available"],"ru":["Языки: 32 · Регионы: 59 · Магазины: 3187","Русский язык доступен"],"ar":["اللغات: 32 · المناطق: 59 · المتاجر: 3187","اللغة العربية متاحة"],"hy":["Լեզուներ՝ 32 · Տարածաշրջաններ՝ 59 · Խանութներ՝ 3187","Հայերենը հասանելի է"],"az":["Dillər: 32 · Regionlar: 59 · Mağazalar: 3187","Azərbaycan dili mövcuddur"],"zh":["语言：32 · 地区：59 · 商店：3187","支持中文"],"cs":["Jazyky: 32 · Regiony: 59 · Obchody: 3187","Čeština je k dispozici"],"nl":["Talen: 32 · Regio's: 59 · Winkels: 3187","Nederlands is beschikbaar"],"fi":["Kielet: 32 · Alueet: 59 · Kaupat: 3187","Suomi on saatavilla"],"fr":["Langues : 32 · Régions : 59 · Magasins : 3187","Le français est disponible"],"ka":["ენები: 32 · რეგიონები: 59 · მაღაზიები: 3187","ქართული ენა ხელმისაწვდომია"],"de":["Sprachen: 32 · Regionen: 59 · Geschäfte: 3187","Deutsch ist verfügbar"],"hi":["भाषाएँ: 32 · क्षेत्र: 59 · स्टोर: 3187","हिन्दी उपलब्ध है"],"id":["Bahasa: 32 · Wilayah: 59 · Toko: 3187","Bahasa Indonesia tersedia"],"it":["Lingue: 32 · Regioni: 59 · Negozi: 3187","L’italiano è disponibile"],"ja":["言語：32 · 地域：59 · ストア：3187","日本語に対応しています"],"kk":["Тілдер: 32 · Аймақтар: 59 · Дүкендер: 3187","Қазақ тілі қолжетімді"],"ko":["언어: 32 · 지역: 59 · 매장: 3187","한국어를 지원합니다"],"mn":["Хэл: 32 · Бүс нутаг: 59 · Дэлгүүр: 3187","Монгол хэл боломжтой"],"pl":["Języki: 32 · Regiony: 59 · Sklepy: 3187","Język polski jest dostępny"],"pt":["Idiomas: 32 · Regiões: 59 · Lojas: 3187","Português disponível"],"pb":["Idiomas: 32 · Regiões: 59 · Lojas: 3187","Português (Brasil) disponível"],"sr":["Језици: 32 · Региони: 59 · Продавнице: 3187","Српски језик је доступан"],"es":["Idiomas: 32 · Regiones: 59 · Tiendas: 3187","El español está disponible"],"em":["Idiomas: 32 · Regiones: 59 · Tiendas: 3187","El español (México) está disponible"],"sv":["Språk: 32 · Regioner: 59 · Butiker: 3187","Svenska finns tillgängligt"],"tg":["Забонҳо: 32 · Минтақаҳо: 59 · Мағозаҳо: 3187","Забони тоҷикӣ дастрас аст"],"tr":["Diller: 32 · Bölgeler: 59 · Mağazalar: 3187","Türkçe mevcut"],"uk":["Мови: 32 · Регіони: 59 · Магазини: 3187","Українська мова доступна"],"uz":["Tillar: 32 · Hududlar: 59 · Doʻkonlar: 3187","Oʻzbek tili mavjud"],"vi":["Ngôn ngữ: 32 · Khu vực: 59 · Cửa hàng: 3187","Có hỗ trợ Tiếng Việt"]};
 Object.keys(B).forEach(function(c){L[c].push(B[c][0],B[c][1])});
-var H={pb:"pt-BR",em:"es-MX"},cur="en",menu=document.getElementById("menu"),gl=document.getElementById("gl");
+L.xe=["Emoji","⬇️📱","📤","🤖☝️","🆓","📴","🔒🔢","💳 ➕ 🎫 ➕ 🪪 ➡️ 📱📴","✨","📷🔳 ➕ ✍️💳","💳🎨 🧩 🌗","🪪🔒🔢","🛡️","🚫☁️ 🚫👀 📱✅","📲❓","1️⃣ ⬇️📱 ➡️ 📂","2️⃣ ✅🌐 ➡️ 📲","✅🔗","0️⃣💰","👤","📦","🗣️ 32 · 🌍 59 · 🏪 3187","😀 ✅"];
+var H={pb:"pt-BR",em:"es-MX",xe:"en"},cur="en",menu=document.getElementById("menu"),gl=document.getElementById("gl");
 function set(c){if(!L[c])c="en";cur=c;var a=L[c],h=document.documentElement;document.getElementById("cl").textContent=a[0];
 document.querySelectorAll("[data-k]").forEach(function(e){e.textContent=a[I[e.dataset.k]]});
 h.lang=H[c]||c;h.dir=c==="ar"?"rtl":"ltr";
 menu.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-current",b.dataset.c===c)});
 try{localStorage.setItem("l",c)}catch(e){}}
-Object.keys(L).forEach(function(c){var b=document.createElement("button");b.dataset.c=c;b.textContent=L[c][0];b.onclick=function(){set(c);close()};menu.appendChild(b)});
+var FL={"en":"us","ru":"ru","ar":"sa","hy":"am","az":"az","zh":"cn","cs":"cz","nl":"nl","fi":"fi","fr":"fr","ka":"ge","de":"de","hi":"in","id":"id","it":"it","ja":"jp","kk":"kz","ko":"kr","mn":"mn","pl":"pl","pt":"pt","pb":"br","sr":"rs","es":"es","em":"mx","sv":"se","tg":"tj","tr":"tr","uk":"ua","uz":"uz","vi":"vn"};
+Object.keys(L).forEach(function(c){var b=document.createElement("button"),f;b.dataset.c=c;if(FL[c]){f=document.createElement("img");f.className="fl";f.alt="";f.loading="lazy";f.width=22;f.height=16;f.src="https://flagcdn.com/w40/"+FL[c]+".png";f.srcset="https://flagcdn.com/w80/"+FL[c]+".png 2x"}else{f=document.createElement("span");f.className="fe";f.textContent="😀"}var n=document.createElement("span");n.textContent=L[c][0];b.appendChild(f);b.appendChild(n);b.onclick=function(){set(c);close()};menu.appendChild(b)});
 function close(){menu.classList.remove("open");gl.setAttribute("aria-expanded","false")}
 gl.onclick=function(e){e.stopPropagation();var o=menu.classList.toggle("open");gl.setAttribute("aria-expanded",o)};
 document.addEventListener("click",close);document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
