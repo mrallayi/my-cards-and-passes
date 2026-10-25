@@ -12,8 +12,12 @@ body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Roboto,"Segoe 
 .w{max-width:960px;margin:0 auto;padding:20px 20px 64px}
 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;color:var(--mut)}
 .lang{position:relative}
-.gl{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--chip);color:var(--fg);cursor:pointer;display:grid;place-items:center}
-.menu{display:none;position:absolute;inset-inline-end:0;top:52px;z-index:5;min-width:210px;max-height:60vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.18);padding:6px 0}
+.gl{display:flex;align-items:center;gap:8px;height:46px;padding:0 16px;border-radius:999px;border:0;background:var(--acc);color:var(--on);font:inherit;font-weight:500;cursor:pointer;box-shadow:0 2px 8px rgba(26,115,232,.35);animation:pulse 1.6s 1s 3}
+.gl svg{flex:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(26,115,232,.55)}100%{box-shadow:0 0 0 14px rgba(26,115,232,0)}}
+@media(prefers-reduced-motion:reduce){.gl{animation:none}}
+.stat{font-weight:500;margin:14px 0 4px}.avail{color:var(--acc);margin:0}
+.menu{display:none;position:absolute;inset-inline-end:0;top:56px;z-index:5;min-width:230px;max-height:60vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.18);padding:6px 0}
 .menu.open{display:block}
 .menu button{display:block;width:100%;text-align:start;padding:10px 18px;background:none;border:0;color:var(--fg);font:inherit;cursor:pointer}
 .menu button:hover{background:var(--chip)}
@@ -37,17 +41,19 @@ h1{font-size:2.1rem;line-height:1.15;margin:0 0 4px;font-weight:500}
 h2{font-size:1.3rem;font-weight:500;margin:34px 0 10px}
 p,ul,ol{max-width:70ch}li{margin:6px 0}
 .shots img{cursor:zoom-in}.links{margin-top:22px}
-.lb{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center}.lb[hidden]{display:none}
-.lb img{max-width:calc(100% - 120px);max-height:94vh;border-radius:12px;height:auto}
-.lb button{position:absolute;border:0;border-radius:50%;width:48px;height:48px;background:rgba(255,255,255,.16);color:#fff;font-size:26px;cursor:pointer}
-.lb button:focus-visible{outline:3px solid #fff}.lbx{top:16px;inset-inline-end:16px}.lbp{inset-inline-start:12px}.lbn{inset-inline-end:12px}
-@media(max-width:560px){.lb img{max-width:100%;max-height:88vh}.lbp,.lbn{top:auto;bottom:16px}.lbp{inset-inline-start:calc(50% - 60px)}.lbn{inset-inline-end:calc(50% - 60px)}}
+.lb{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.94);display:flex;align-items:center;justify-content:center}.lb[hidden]{display:none}
+.lb img{max-width:calc(100% - 150px);max-height:92vh;height:auto;border-radius:12px}
+.lb button{position:absolute;z-index:3;width:52px;height:52px;padding:0;border-radius:50%;background:rgba(0,0,0,.65);border:2px solid rgba(255,255,255,.9);color:#fff;display:grid;place-items:center;cursor:pointer}
+.lb button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.lbx{top:max(14px,env(safe-area-inset-top));right:14px}.lbp{left:14px;top:50%;margin-top:-26px}.lbn{right:14px;top:50%;margin-top:-26px}
+.lbk{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#fff;font-size:.9rem}
+@media(max-width:560px){.lb img{max-width:100%;max-height:calc(100% - 190px)}.lbp,.lbn{top:auto;margin-top:0;bottom:max(20px,env(safe-area-inset-bottom))}.lbp{left:calc(50% - 76px)}.lbn{right:calc(50% - 76px)}.lbk{bottom:max(34px,calc(env(safe-area-inset-bottom) + 14px))}}
 .toast{position:fixed;inset-inline:0;bottom:24px;margin:auto;width:max-content;max-width:90%;background:var(--fg);color:var(--bg);padding:10px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.on{opacity:1}
 @media(max-width:560px){.hero{gap:16px}.hero img{width:88px;height:88px;border-radius:20px}h1{font-size:1.5rem}.shots img{height:360px}.btn{padding:10px 22px}}
 </style></head><body><div class="w">
 <div class="top"><span>GitHub</span>
-<div class="lang"><button class="gl" id="gl" aria-label="Language" aria-haspopup="true" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg></button><div class="menu" id="menu"></div></div></div>
+<div class="lang"><button class="gl" id="gl" aria-label="Language" aria-haspopup="true" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><span id="cl">English</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="menu" id="menu"></div></div></div>
 <div class="hero"><img src="docs/docs/icon.png" alt="">
 <div><h1>My Cards &amp; Passes</h1><p class="dev">mrallayi</p><p class="tag" data-k="tag"></p>
 <div class="row"><a class="btn" id="dl" href="https://github.com/mrallayi/my-cards-and-passes/releases/latest/download/My.Cards.and.Passes.apk" data-k="dl"></a><button class="btn alt" id="share" data-k="share"></button></div>
@@ -55,12 +61,13 @@ p,ul,ol{max-width:70ch}li{margin:6px 0}
 <div class="stats"><div><b data-k="price"></b><span data-k="free"></span></div><div><b>100%</b><span data-k="offline"></span></div><div><b>PIN</b><span data-k="lock"></span></div></div>
 <div class="shots" tabindex="0"><img src="docs/docs/screens/1.jpg" alt=""><img src="docs/docs/screens/2.jpg" alt=""><img src="docs/docs/screens/3.jpg" alt=""><img src="docs/docs/screens/4.jpg" alt=""><img src="docs/docs/screens/5.jpg" alt=""><img src="docs/docs/screens/6.jpg" alt=""><img src="docs/docs/screens/7.jpg" alt=""><img src="docs/docs/screens/8.jpg" alt=""></div>
 <h2 data-k="feath"></h2><ul><li data-k="f1"></li><li data-k="f2"></li><li data-k="f3"></li></ul>
+<p class="stat" data-k="stat"></p><p class="avail" data-k="avail"></p>
 <h2 data-k="privh"></h2><p data-k="privt"></p>
 <h2 data-k="insth"></h2><ol><li data-k="i1"></li><li data-k="i2"></li></ol>
 <div class="row links"><a class="btn alt" href="https://github.com/MrAllayi" target="_blank" rel="noopener"><span data-k="auth"></span>: mrallayi</a><a class="btn alt" href="https://github.com/mrallayi/my-cards-and-passes" target="_blank" rel="noopener"><span data-k="repo"></span>: my-cards-and-passes</a></div>
-</div><div class="lb" id="lb" hidden><button class="lbx" id="lbc" aria-label="Close">✕</button><button class="lbp" id="lbp" aria-label="Previous">‹</button><img id="lbi" alt=""><button class="lbn" id="lbn" aria-label="Next">›</button></div><div class="toast" id="toast" data-k="copied" role="status"></div>
+</div><div class="lb" id="lb" dir="ltr" hidden><button class="lbx" id="lbc" aria-label="Close"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button><button class="lbp" id="lbp" aria-label="Previous"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><img id="lbi" alt=""><button class="lbn" id="lbn" aria-label="Next"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button><span class="lbk" id="lbk"></span></div><div class="toast" id="toast" data-k="copied" role="status"></div>
 <script>
-var K=["name","dl","share","android","free","offline","lock","tag","feath","f1","f2","f3","privh","privt","insth","i1","i2","copied","price","auth","repo"],I={};K.forEach(function(k,i){I[k]=i});
+var K=["name","dl","share","android","free","offline","lock","tag","feath","f1","f2","f3","privh","privt","insth","i1","i2","copied","price","auth","repo","stat","avail"],I={};K.forEach(function(k,i){I[k]=i});
 var L={
 en:["English","Download APK","Share","Android only","Free","Offline","PIN lock","All your loyalty cards, tickets and passes in one offline app.","Features","Scan barcodes and QR codes or add cards by hand","Realistic card designs, layouts and themes","Lock sensitive passes with a PIN","Privacy","No data is collected or shared. Everything stays on your device.","How to install","Download the APK on your phone and open it.","Allow installs from this source, then tap Install.","Link copied","$0"],
 ru:["Русский","Скачать APK","Поделиться","Только для Android","Бесплатно","Офлайн","PIN-код","Все ваши карты лояльности, билеты и пропуска в одном офлайн-приложении.","Возможности","Сканируйте штрихкоды и QR-коды или добавляйте карты вручную","Реалистичные дизайны карт, макеты и темы","Защищайте важные пропуска PIN-кодом","Конфиденциальность","Данные не собираются и не передаются. Всё хранится на вашем устройстве.","Как установить","Скачайте APK на телефон и откройте файл.","Разрешите установку из этого источника и нажмите «Установить».","Ссылка скопирована","0 ₽"],
@@ -95,8 +102,10 @@ uz:["Oʻzbekcha","APK yuklab olish","Ulashish","Faqat Android uchun","Bepul","Of
 vi:["Tiếng Việt","Tải APK","Chia sẻ","Chỉ dành cho Android","Miễn phí","Ngoại tuyến","Khóa PIN","Mọi thẻ khách hàng thân thiết, vé và thẻ ra vào của bạn trong một ứng dụng ngoại tuyến.","Tính năng","Quét mã vạch và mã QR hoặc thêm thẻ thủ công","Thiết kế thẻ chân thực, bố cục và giao diện","Khóa các thẻ nhạy cảm bằng mã PIN","Quyền riêng tư","Không thu thập hay chia sẻ dữ liệu. Mọi thứ nằm trên thiết bị của bạn.","Cách cài đặt","Tải APK về điện thoại và mở tệp.","Cho phép cài đặt từ nguồn này rồi nhấn Cài đặt.","Đã sao chép liên kết","0 ₫"]};
 var A={en:["Author","Repository"],ru:["Автор","Репозиторий"],ar:["المطوّر","المستودع"],hy:["Հեղինակ","Շտեմարան"],az:["Müəllif","Repozitoriya"],zh:["作者","代码仓库"],cs:["Autor","Repozitář"],nl:["Auteur","Repository"],fi:["Tekijä","Repositorio"],fr:["Auteur","Dépôt"],ka:["ავტორი","რეპოზიტორია"],de:["Autor","Repository"],hi:["लेखक","रिपॉजिटरी"],id:["Pembuat","Repositori"],it:["Autore","Repository"],ja:["作者","リポジトリ"],kk:["Автор","Репозиторий"],ko:["제작자","저장소"],mn:["Зохиогч","Репозитори"],pl:["Autor","Repozytorium"],pt:["Autor","Repositório"],pb:["Autor","Repositório"],sr:["Аутор","Репозиторијум"],es:["Autor","Repositorio"],em:["Autor","Repositorio"],sv:["Upphovsman","Repository"],tg:["Муаллиф","Репозиторий"],tr:["Yazar","Depo"],uk:["Автор","Репозиторій"],uz:["Muallif","Repozitoriy"],vi:["Tác giả","Kho mã nguồn"]};
 Object.keys(A).forEach(function(c){L[c].push(A[c][0],A[c][1])});
+var B={"en":["Languages: 32 · Regions: 59 · Stores: 3187","English is available"],"ru":["Языки: 32 · Регионы: 59 · Магазины: 3187","Русский язык доступен"],"ar":["اللغات: 32 · المناطق: 59 · المتاجر: 3187","اللغة العربية متاحة"],"hy":["Լեզուներ՝ 32 · Տարածաշրջաններ՝ 59 · Խանութներ՝ 3187","Հայերենը հասանելի է"],"az":["Dillər: 32 · Regionlar: 59 · Mağazalar: 3187","Azərbaycan dili mövcuddur"],"zh":["语言：32 · 地区：59 · 商店：3187","支持中文"],"cs":["Jazyky: 32 · Regiony: 59 · Obchody: 3187","Čeština je k dispozici"],"nl":["Talen: 32 · Regio's: 59 · Winkels: 3187","Nederlands is beschikbaar"],"fi":["Kielet: 32 · Alueet: 59 · Kaupat: 3187","Suomi on saatavilla"],"fr":["Langues : 32 · Régions : 59 · Magasins : 3187","Le français est disponible"],"ka":["ენები: 32 · რეგიონები: 59 · მაღაზიები: 3187","ქართული ენა ხელმისაწვდომია"],"de":["Sprachen: 32 · Regionen: 59 · Geschäfte: 3187","Deutsch ist verfügbar"],"hi":["भाषाएँ: 32 · क्षेत्र: 59 · स्टोर: 3187","हिन्दी उपलब्ध है"],"id":["Bahasa: 32 · Wilayah: 59 · Toko: 3187","Bahasa Indonesia tersedia"],"it":["Lingue: 32 · Regioni: 59 · Negozi: 3187","L’italiano è disponibile"],"ja":["言語：32 · 地域：59 · ストア：3187","日本語に対応しています"],"kk":["Тілдер: 32 · Аймақтар: 59 · Дүкендер: 3187","Қазақ тілі қолжетімді"],"ko":["언어: 32 · 지역: 59 · 매장: 3187","한국어를 지원합니다"],"mn":["Хэл: 32 · Бүс нутаг: 59 · Дэлгүүр: 3187","Монгол хэл боломжтой"],"pl":["Języki: 32 · Regiony: 59 · Sklepy: 3187","Język polski jest dostępny"],"pt":["Idiomas: 32 · Regiões: 59 · Lojas: 3187","Português disponível"],"pb":["Idiomas: 32 · Regiões: 59 · Lojas: 3187","Português (Brasil) disponível"],"sr":["Језици: 32 · Региони: 59 · Продавнице: 3187","Српски језик је доступан"],"es":["Idiomas: 32 · Regiones: 59 · Tiendas: 3187","El español está disponible"],"em":["Idiomas: 32 · Regiones: 59 · Tiendas: 3187","El español (México) está disponible"],"sv":["Språk: 32 · Regioner: 59 · Butiker: 3187","Svenska finns tillgängligt"],"tg":["Забонҳо: 32 · Минтақаҳо: 59 · Мағозаҳо: 3187","Забони тоҷикӣ дастрас аст"],"tr":["Diller: 32 · Bölgeler: 59 · Mağazalar: 3187","Türkçe mevcut"],"uk":["Мови: 32 · Регіони: 59 · Магазини: 3187","Українська мова доступна"],"uz":["Tillar: 32 · Hududlar: 59 · Doʻkonlar: 3187","Oʻzbek tili mavjud"],"vi":["Ngôn ngữ: 32 · Khu vực: 59 · Cửa hàng: 3187","Có hỗ trợ Tiếng Việt"]};
+Object.keys(B).forEach(function(c){L[c].push(B[c][0],B[c][1])});
 var H={pb:"pt-BR",em:"es-MX"},cur="en",menu=document.getElementById("menu"),gl=document.getElementById("gl");
-function set(c){if(!L[c])c="en";cur=c;var a=L[c],h=document.documentElement;
+function set(c){if(!L[c])c="en";cur=c;var a=L[c],h=document.documentElement;document.getElementById("cl").textContent=a[0];
 document.querySelectorAll("[data-k]").forEach(function(e){e.textContent=a[I[e.dataset.k]]});
 h.lang=H[c]||c;h.dir=c==="ar"?"rtl":"ltr";
 menu.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-current",b.dataset.c===c)});
@@ -106,10 +115,11 @@ function close(){menu.classList.remove("open");gl.setAttribute("aria-expanded","
 gl.onclick=function(e){e.stopPropagation();var o=menu.classList.toggle("open");gl.setAttribute("aria-expanded",o)};
 document.addEventListener("click",close);document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
 var imgs=[].slice.call(document.querySelectorAll(".shots img")),ci=0,lb=document.getElementById("lb"),lbi=document.getElementById("lbi"),sx=0;
-function show(i){ci=(i+imgs.length)%imgs.length;lbi.src=imgs[ci].src;lb.hidden=false;document.body.style.overflow="hidden";document.getElementById("lbc").focus()}
-function hide(){lb.hidden=true;document.body.style.overflow=""}
+function show(i){ci=(i+imgs.length)%imgs.length;lbi.src=imgs[ci].src;document.getElementById("lbk").textContent=(ci+1)+" / "+imgs.length;if(lb.hidden){try{history.pushState({lb:1},"")}catch(e){}}lb.hidden=false;document.body.style.overflow="hidden";document.getElementById("lbc").focus()}
+function hide(p){if(lb.hidden)return;lb.hidden=true;document.body.style.overflow="";if(!p&&history.state&&history.state.lb){history.back()}}
+window.addEventListener("popstate",function(){hide(true)});
 imgs.forEach(function(m,i){m.tabIndex=0;m.onclick=function(){show(i)};m.onkeydown=function(e){if(e.key==="Enter")show(i)}});
-document.getElementById("lbc").onclick=hide;document.getElementById("lbp").onclick=function(){show(ci-1)};document.getElementById("lbn").onclick=function(){show(ci+1)};
+document.getElementById("lbc").onclick=function(){hide()};document.getElementById("lbp").onclick=function(){show(ci-1)};document.getElementById("lbn").onclick=function(){show(ci+1)};
 lb.onclick=function(e){if(e.target===lb)hide()};
 lb.addEventListener("touchstart",function(e){sx=e.touches[0].clientX});
 lb.addEventListener("touchend",function(e){var d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(ci+(d<0?1:-1))});
